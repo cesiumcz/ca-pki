@@ -1,0 +1,235 @@
+# OpenSSL <CA_NAME> config
+
+# PKCS11 Engine
+openssl_conf = openssl_def
+
+[ca]
+default_ca = CA_default
+
+[CA_default]
+# See `man ca`.
+dir               = .
+certs             = $dir/certs
+crl_dir           = $dir/crl
+new_certs_dir     = $dir/newcerts
+database          = $dir/index.txt
+serial            = $dir/serial
+RANDFILE          = $dir/private/.rand
+private_key       = $dir/private/ca.key.pem
+certificate       = $dir/certs/ca.cert.pem
+default_md        = sha256
+rand_serial       = yes
+crl               = $dir/crl/ca.crl.pem
+crl_extensions    = v3_crl_ext
+default_crl_days  = <CRL_DAYS>
+default_days      = <DEFAULT_DAYS>
+name_opt          = ca_default
+cert_opt          = ca_default
+preserve          = no
+policy            = <POLICY>
+
+[policy_strict]
+# The Root CA should only sign issuing certificates that match.
+# See the POLICY FORMAT section of `man ca`.
+countryName             = match
+stateOrProvinceName     = match
+organizationName        = match
+organizationIdentifier  = match
+organizationalUnitName  = optional
+commonName              = supplied
+emailAddress            = optional
+telephoneNumber         = optional
+
+[policy_loose]
+# Allow the issuing CA to sign a more diverse range of certificates.
+# See the POLICY FORMAT section of `man ca`.
+countryName             = optional
+stateOrProvinceName     = optional
+localityName            = optional
+organizationName        = optional
+organizationIdentifier  = optional
+organizationalUnitName  = optional
+commonName              = supplied
+emailAddress            = optional
+telephoneNumber         = optional
+
+[req]
+# Options for the `req` tool (`man req`).
+default_bits        = 2048
+distinguished_name  = req_distinguished_name
+utf8                = yes
+string_mask         = utf8only
+nameopt             = multiline,utf8
+default_md          = sha256
+# Extension to add when the -x509 option is used.
+x509_extensions     = v3_ca
+
+[req_distinguished_name]
+# See <https://en.wikipedia.org/wiki/Certificate_signing_request>.
+countryName                     = Country Name (2 letter code)
+stateOrProvinceName             = State or Province Name
+localityName                    = Locality Name
+organizationName                = Organization Name
+organizationIdentifier          = Organization Identifier
+#organizationalUnitName          = Organizational Unit Name
+#emailAddress                    = Email Address
+#telephoneNumber                 = Telephone Number
+commonName                      = Common Name
+
+# Optionally, specify some defaults.
+countryName_default             = <DN_COUNTRY>
+stateOrProvinceName_default     = <DN_STATE>
+localityName_default            = <DN_LOCALITY>
+organizationName_default        = <DN_ORG>
+organizationIdentifier_default  = <DN_ORG_IDENTIFIER>
+organizationalUnitName_default  =
+emailAddress_default            =
+telephoneNumber_default         =
+
+[v3_ca]
+# Extensions for a typical CA (`man x509v3_config`).
+basicConstraints       = critical, CA:TRUE
+subjectKeyIdentifier   = hash
+authorityKeyIdentifier = keyid:always,issuer
+keyUsage               = critical, digitalSignature, cRLSign, keyCertSign
+certificatePolicies    = @v3_policy
+
+[v3_issuing_ca]
+# Extensions for a typical issuing CA (`man x509v3_config`).
+basicConstraints       = critical, CA:TRUE, pathlen:0
+subjectKeyIdentifier   = hash
+authorityKeyIdentifier = keyid:always,issuer
+keyUsage               = critical, digitalSignature, cRLSign, keyCertSign
+crlDistributionPoints  = URI:<CRL_ROOT>
+authorityInfoAccess    = OCSP;URI:<OCSP>
+authorityInfoAccess    = caIssuers;URI:<CAISSUERS>
+#nameConstraints        = 
+certificatePolicies    = @v3_policy
+
+[v3_personal]
+# Extensions for client certificates (`man x509v3_config`).
+basicConstraints       = CA:FALSE
+subjectKeyIdentifier   = hash
+authorityKeyIdentifier = keyid,issuer
+keyUsage               = critical, nonRepudiation, digitalSignature, keyEncipherment, dataEncipherment, keyAgreement
+# WARNING. ipsecEndSystem (1.3.6.1.5.5.7.3.5), ipsecTunnel (1.3.6.1.5.5.7.3.6) and ipsecUser (1.3.6.1.5.5.7.3.7) extensions have been deprecated!
+# 1.3.6.1.4.1.311.20.2.2  = Microsoft Smart Card Sign-in (required for smart card logon)
+# For more info, see: https://learn.microsoft.com/en-us/windows/security/identity-protection/smart-cards/smart-card-certificate-requirements-and-enumeration
+# 1.3.6.1.4.1.311.10.3.12 = Microsoft Signer of documents
+extendedKeyUsage       = clientAuth, emailProtection, 1.3.6.1.4.1.311.20.2.2, 1.3.6.1.4.1.311.10.3.12
+subjectAltName         = @v3_personal_alt_names
+crlDistributionPoints  = URI:<CRL_PERSONAL>
+authorityInfoAccess    = OCSP;URI:<OCSP>
+certificatePolicies    = @v3_policy_personal
+
+[v3_personal_alt_names]
+# Copy first SAN email from DN:EMAIL
+email.1                = copy
+#email.2               = secondary@example.org
+#email.3               = ternary@example.org
+# 1.3.6.1.4.1.311.20.2.3 = Microsoft User Principal Name (UPN) required for smart card logon
+# For more info, see: https://learn.microsoft.com/en-us/windows/security/identity-protection/smart-cards/smart-card-certificate-requirements-and-enumeration
+# Example: username@domain.local
+otherName.0            = 1.3.6.1.4.1.311.20.2.3;FORMAT:UTF8,UTF8:username@example.lan
+
+[v3_server]
+# Extensions for server certificates (`man x509v3_config`).
+basicConstraints       = CA:FALSE
+subjectKeyIdentifier   = hash
+authorityKeyIdentifier = keyid,issuer:always
+keyUsage               = critical, digitalSignature, keyEncipherment, dataEncipherment, keyAgreement
+# 1.3.6.1.4.1.311.54.1.2 = Microsoft Remote Desktop Authentication (not mandatory but useful)
+extendedKeyUsage       = serverAuth, 1.3.6.1.4.1.311.54.1.2
+subjectAltName         = @v3_server_alt_names
+crlDistributionPoints  = URI:<CRL_DVTLS>
+authorityInfoAccess    = OCSP;URI:<OCSP>
+certificatePolicies    = @v3_policy_dvtls
+
+[v3_server_alt_names]
+DNS.1                  = <HOST>.example.lan
+#DNS.2                  = localhost
+#IP.1                   = 127.0.0.1
+#IP.2                   = 192.168.1.100
+
+[v3_radius_server]
+basicConstraints       = CA:FALSE
+subjectKeyIdentifier   = hash
+authorityKeyIdentifier = keyid:always,issuer:always
+keyUsage               = critical, digitalSignature, keyEncipherment, keyAgreement
+# 1.3.6.1.5.5.7.3.13 = EAP over PPP. See RFC 4334.
+# 1.3.6.1.5.5.7.3.14 = EAP over LAN / WAN. See RFC 4334.
+extendedKeyUsage       = serverAuth, 1.3.6.1.5.5.7.3.13, 1.3.6.1.5.5.7.3.14
+subjectAltName         = @v3_radius_server_alt_names
+# RADIUS server certificate is issued by DV TLS CA
+crlDistributionPoints  = URI:<CRL_DVTLS>
+authorityInfoAccess    = OCSP;URI:<OCSP>
+certificatePolicies    = @v3_policy_dvtls
+
+[v3_radius_server_alt_names]
+DNS.1                  = <RADIUS_DNS>
+# NAIRealm from RFC 7585
+otherName.0            = 1.3.6.1.5.5.7.8.8;FORMAT:UTF8,UTF8:<RADIUS_DNS>
+
+[v3_ocsp]
+# Extension for OCSP signing certificates (`man ocsp`).
+basicConstraints       = CA:FALSE
+subjectKeyIdentifier   = hash
+authorityKeyIdentifier = keyid,issuer
+keyUsage               = critical, nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage       = critical, OCSPSigning
+
+[v3_dvtls_name_constraints]
+permitted;IP.1         = 127.0.0.0/255.0.0.0
+permitted;IP.3         = 10.0.0.0/255.0.0.0
+permitted;IP.4         = 172.16.0.0/255.240.0.0
+permitted;IP.5         = 192.168.0.0/255.255.0.0
+permitted;DNS.1        = example.org
+permitted;DNS.2        = .example.org
+permitted;DNS.3        = example.lan
+permitted;DNS.4        = .example.lan
+permitted;DNS.5        = localhost
+
+[v3_personal_name_constraints]
+permitted;email.1      = example.org
+permitted;email.2      = .example.org
+
+[v3_crl_ext]
+# Extension for CRLs (`man x509v3_config`).
+authorityKeyIdentifier = keyid:always
+
+[v3_policy]
+policyIdentifier = <POLICY_OID>
+CPS.1            = <CPS_URI>
+userNotice.1     = @v3_policy_notice
+
+[v3_policy_notice]
+explicitText     = "UTF8:<NOTICE>"
+
+[v3_policy_personal]
+policyIdentifier = <POLICY_OID>
+CPS.1            = <CPS_URI>
+userNotice.1     = @v3_policy_personal_notice
+
+[v3_policy_personal_notice]
+explicitText     = "UTF8:<NOTICE_PERSONAL>"
+
+[v3_policy_dvtls]
+policyIdentifier = <POLICY_OID>
+CPS.1            = <CPS_URI>
+userNotice.1     = @v3_policy_dvtls_notice
+
+[v3_policy_dvtls_notice]
+explicitText     = "UTF8:<NOTICE_DVTLS>"
+
+# PKCS11 Engine
+[openssl_def]
+engines          = engine_section
+
+[engine_section]
+pkcs11           = pkcs11_section
+
+[pkcs11_section]
+engine_id        = pkcs11
+#dynamic_path    = /usr/local/lib/engines/pkcs11.so
+MODULE_PATH      = /usr/lib/libeToken.so
+init             = 0

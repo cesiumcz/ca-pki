@@ -1,0 +1,23 @@
+# Ignore OpenSSL config backup
+openssl.cnf.bak
+
+# Ignore index.txt.old, index.txt.attr.old, serial.old
+*.old
+
+# Ignore all fullchain certificates except CA fullchain certificates
+*.fchain-cert.pem
+!ca.fchain-cert.pem
+
+# Ignore CSR
+csr/
+*.csr*
+
+# Ignore CRL
+crl/
+*.crl*
+
+# Ignore all private keys including PKCS#12 bundles
+private/
+*.key*
+*.p12
+*.pfx

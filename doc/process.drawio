@@ -1,0 +1,229 @@
+<mxfile host="app.diagrams.net" modified="2023-10-04T21:05:31.022Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0" etag="B8FYVy7WUrYUA2bWipG9" version="22.0.2" type="device">
+  <diagram name="Stránka-1" id="wUL4Im43vhcqDSN6cocj">
+    <mxGraphModel dx="880" dy="444" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-32" value="1. CA Initialization" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=115;height=30;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="65" y="20" width="355" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-2" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-7" target="LaXR58Pfmp0eDh65b5v8-3" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="305" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-3" value="Customize OpenSSL template" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" parent="1" vertex="1">
+          <mxGeometry x="245" y="180" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-4" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-3" target="LaXR58Pfmp0eDh65b5v8-5" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="305" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-5" value="Generate CA keypairs" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" parent="1" vertex="1">
+          <mxGeometry x="245" y="250" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;endArrow=open;endFill=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-6" target="LaXR58Pfmp0eDh65b5v8-30" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-6" value="&lt;div&gt;Temporary&lt;/div&gt;filesystem" style="shape=datastore;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="270" y="320" width="70" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-7" value="Clone git repository" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" parent="1" vertex="1">
+          <mxGeometry x="245" y="110" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-9" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-5" target="LaXR58Pfmp0eDh65b5v8-6" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="315" y="260" as="targetPoint" />
+            <mxPoint x="315" y="230" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-10" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" parent="1" vertex="1">
+          <mxGeometry x="290" y="50" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-11" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-10" target="LaXR58Pfmp0eDh65b5v8-7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="305" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-20" value="Generate encrypt keypair" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" parent="1" vertex="1">
+          <mxGeometry x="80" y="250" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-22" value="Create archive &lt;br&gt;&amp;amp; encrypt" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" parent="1" vertex="1">
+          <mxGeometry x="80" y="330" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-23" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#000000;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;dashed=1;" parent="1" source="LaXR58Pfmp0eDh65b5v8-6" target="LaXR58Pfmp0eDh65b5v8-22" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="315" y="330" as="targetPoint" />
+            <mxPoint x="315" y="300" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-24" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-5" target="LaXR58Pfmp0eDh65b5v8-20" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="210" y="360" as="targetPoint" />
+            <mxPoint x="280" y="360" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-25" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-20" target="LaXR58Pfmp0eDh65b5v8-22" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="210" y="280" as="targetPoint" />
+            <mxPoint x="255" y="280" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-27" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#000000;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;dashed=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-22" target="LaXR58Pfmp0eDh65b5v8-29" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="420" as="targetPoint" />
+            <mxPoint x="280" y="360" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-29" value="Private key backup" style="image;html=1;image=img/lib/clip_art/finance/Safe_128x128.png" parent="1" vertex="1">
+          <mxGeometry x="100" y="390" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-33" value="2. Certificate issue" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=120;height=30;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="420" y="20" width="410" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-36" value="" style="image;html=1;image=img/lib/clip_art/computers/Laptop_128x128.png" parent="1" vertex="1">
+          <mxGeometry x="430" y="110" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-37" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" parent="1" vertex="1">
+          <mxGeometry x="602" y="65" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-38" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-37" target="LaXR58Pfmp0eDh65b5v8-57" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="667" y="170" as="targetPoint" />
+            <mxPoint x="617" y="95" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-39" value="Generate CSR" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" parent="1" vertex="1">
+          <mxGeometry x="569.5" y="185" width="95" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-40" value="Applicant" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" parent="1" vertex="1">
+          <mxGeometry x="520" y="110" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-46" value="CA" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" parent="1" vertex="1">
+          <mxGeometry x="190" y="50" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-47" value="Applicant" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=70;height=30;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="420" y="60" width="410" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-48" value="Validate CSR" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" parent="1" vertex="1">
+          <mxGeometry x="569.5" y="255" width="95" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-49" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-39" target="LaXR58Pfmp0eDh65b5v8-48" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="627" y="240" as="targetPoint" />
+            <mxPoint x="627" y="210" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-50" value="Issue certificate" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" parent="1" vertex="1">
+          <mxGeometry x="564.5" y="310" width="105" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-51" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-48" target="LaXR58Pfmp0eDh65b5v8-50" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="627" y="260" as="targetPoint" />
+            <mxPoint x="627" y="180" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-52" value="CA" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=70;height=30;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="420" y="230" width="410" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-53" value="Credential&lt;br&gt;manager" style="shape=datastore;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="105" y="60" width="70" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-54" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#000000;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;" parent="1" target="LaXR58Pfmp0eDh65b5v8-53" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="210" y="360" as="targetPoint" />
+            <mxPoint x="140" y="250" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-57" value="Generate keypair" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" parent="1" vertex="1">
+          <mxGeometry x="564.5" y="120" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-58" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-57" target="LaXR58Pfmp0eDh65b5v8-39" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="627" y="120" as="targetPoint" />
+            <mxPoint x="627" y="105" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;endArrow=open;endFill=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-59" target="LaXR58Pfmp0eDh65b5v8-62" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-59" value="Create PKCS#12 bundle" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" parent="1" vertex="1">
+          <mxGeometry x="692" y="170" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-61" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-50" target="LaXR58Pfmp0eDh65b5v8-59" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="627" y="335" as="targetPoint" />
+            <mxPoint x="627" y="270" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-30" value="HSM" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/CrystalClear/128x128/devices/usbpendrive_unmount.png" parent="1" vertex="1">
+          <mxGeometry x="400" y="300" width="70" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-45" value="" style="image;html=1;image=img/lib/clip_art/computers/Laptop_128x128.png;flipH=0;" parent="1" vertex="1">
+          <mxGeometry x="430" y="387.5" width="80" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-62" value="Filesystem" style="shape=datastore;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="692" y="70" width="70" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="LaXR58Pfmp0eDh65b5v8-42" value="CA" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="237" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Ks9rjnm4GCQIyJHjXV6P-1" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;" parent="1" vertex="1">
+          <mxGeometry x="779" y="110" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Ks9rjnm4GCQIyJHjXV6P-2" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;exitX=0.85;exitY=0.003;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-59" target="Ks9rjnm4GCQIyJHjXV6P-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="762" y="220" as="targetPoint" />
+            <mxPoint x="680" y="440" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ks9rjnm4GCQIyJHjXV6P-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.001;entryY=0.824;entryDx=0;entryDy=0;dashed=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryPerimeter=0;endArrow=open;endFill=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-57" target="LaXR58Pfmp0eDh65b5v8-62" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="732" y="180" as="sourcePoint" />
+            <mxPoint x="737" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ks9rjnm4GCQIyJHjXV6P-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.127;entryY=-0.014;entryDx=0;entryDy=0;dashed=1;exitX=0.219;exitY=0.984;exitDx=0;exitDy=0;entryPerimeter=0;exitPerimeter=0;endArrow=open;endFill=0;" parent="1" source="LaXR58Pfmp0eDh65b5v8-62" target="LaXR58Pfmp0eDh65b5v8-59" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="680" y="138" as="sourcePoint" />
+            <mxPoint x="702" y="138" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PXRJpFJOjexLMDzxuJaX-1" value="&lt;div&gt;Git repo&lt;/div&gt;" style="shape=datastore;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="560" y="400" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PXRJpFJOjexLMDzxuJaX-2" value="&lt;br&gt;Git is used to backup &lt;br&gt;CA index and to track changes.&lt;br&gt;&lt;div&gt;Hypothetical private keys and sensitive files are ignored in .gitignore.&lt;br&gt;Privkeys stays inside HSM though.&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;size=22;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="630" y="370" width="190" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="PXRJpFJOjexLMDzxuJaX-5" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#000000;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;dashed=1;" edge="1" parent="1" source="LaXR58Pfmp0eDh65b5v8-50">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="323" as="targetPoint" />
+            <mxPoint x="280" y="360" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PXRJpFJOjexLMDzxuJaX-6" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#000000;rounded=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" target="LaXR58Pfmp0eDh65b5v8-50">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="328" as="targetPoint" />
+            <mxPoint x="480" y="348" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PXRJpFJOjexLMDzxuJaX-7" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#000000;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;startArrow=open;startFill=0;" edge="1" parent="1" source="LaXR58Pfmp0eDh65b5v8-45" target="PXRJpFJOjexLMDzxuJaX-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="580" y="358" as="targetPoint" />
+            <mxPoint x="490" y="358" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PXRJpFJOjexLMDzxuJaX-9" value="git" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PXRJpFJOjexLMDzxuJaX-7">
+          <mxGeometry y="-3" relative="1" as="geometry">
+            <mxPoint y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
