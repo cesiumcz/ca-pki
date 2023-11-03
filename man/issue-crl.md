@@ -28,10 +28,3 @@ openssl crl -in crl/ca.crl.der -noout -text
 ```
 
 **Do not forget to upload new CRL onto webserver!**
-
-[Optional] Git commit
-```
-git add .
-git commit -m "Issued new CRL"
-git push
-```

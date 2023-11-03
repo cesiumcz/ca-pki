@@ -73,6 +73,11 @@ openssl ca -config ./openssl.cnf \
 	-inform DER -in csr/<HOST>.example.lan_<YEAR>.csr.der -out certs/<HOST>.example.lan_<YEAR>.cert.pem
 ```
 
+Undo changes in `openssl.cnf`
+```
+git checkout HEAD -- openssl.cnf
+```
+
 Verify the certificate
 ```
 openssl x509 -noout -text -nameopt utf8 -in certs/<HOST>.example.lan_<YEAR>.cert.pem
