@@ -57,6 +57,7 @@ Set alternative name(s)
 ```
 vim +149 openssl.cnf
 ```
+```
 [v3_server_alt_names]
 DNS.1                  = <HOST>.example.lan
 #DNS.2                  = localhost

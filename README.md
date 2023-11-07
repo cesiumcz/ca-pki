@@ -8,8 +8,8 @@ The manual consists of `openssl.cnf` configuration file and multiple OpenSSL bin
 Calling OpenSSL manually is straightforward and comprehensible but not the most effective and human error-proof solution though.  
 The next step would be to create a wrapper similar to [EasyRSA](https://github.com/OpenVPN/easy-rsa) shell or [FreeRADIUS Makefile](https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/certs/Makefile) wrapper, that will automate the process and include automated checks.
 
-![CA Hierarchy diagram](./doc/hierarchy/pki.svg)
-![Process diagram](./doc/process.svg)
+![CA Hierarchy diagram](./doc/hierarchy/pki.jpg)
+![Process diagram](./doc/process.jpg)
 
 
 ## Contents
