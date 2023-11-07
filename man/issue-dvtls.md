@@ -17,7 +17,9 @@ openssl genrsa -aes256 -out private/<HOST>.example.lan_<YEAR>.key.pem 2048 && ch
 Set alternative name(s)  
 **WARNING: Issuing certificates for IP addresses or Internal Name is strongly not recommended.**
 ```
-vim +148 openssl.cnf
+vim +149 openssl.cnf
+```
+```
 [v3_server_alt_names]
 DNS.1                  = <HOST>.example.lan
 #DNS.2                  = localhost
@@ -50,9 +52,11 @@ In case of wrong request DN, instead of rejecting the request and asking the app
 `-subj "/C=<Country Name>/ST=<State>/L=<Locality Name>/O=<Organization Name>/CN=<Common Name>/"`  
 Fields that are set to match according to policy does not need to be fixed since they are copied from signing certificate.
 
-Set alternative name(s)
+Set alternative name(s)  
+**WARNING: Issuing certificates for IP addresses or Internal Name is strongly not recommended.**
 ```
-vim +148 openssl.cnf
+vim +149 openssl.cnf
+```
 [v3_server_alt_names]
 DNS.1                  = <HOST>.example.lan
 #DNS.2                  = localhost

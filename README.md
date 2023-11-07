@@ -2,7 +2,7 @@
 ## Abstract
 This manual explains how to [create](man/init-root.md) and [use](man/issue-personal.md) a real-world use-case Certificate Authority in small/medium-sized organizations using the OpenSSL toolkit.  
 Great emphasis is placed on [X.509v3 attributes](#supported-end-entity-certificate-types) to enable multipurpose use of end-entity certificates.  
-To demonstrate the seriousness of the Certificate Authority to our partners, we will store CA private keys in [FIPS-certified HSM](man/init-token.md), which will be used for end-entity certificate signing.  
+To demonstrate the seriousness of the Certificate Authority to our partners, we will restrict the CA using `nameConstraints` and store CA private keys in [FIPS-certified HSM](man/init-token.md), which will be used for end-entity certificate signing.  
 CA private keys will be [backed on a USB drive, asymmetrically encrypted](man/backup.md), and stored in a safe place.
 The manual consists of `openssl.cnf` configuration file and multiple OpenSSL binary calls.  
 Calling OpenSSL manually is straightforward and comprehensible but not the most effective and human error-proof solution though.  

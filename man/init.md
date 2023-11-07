@@ -19,7 +19,7 @@ Set path to HSM OpenSC library
 sed -i 's#<OpenSC_LIB>#/usr/lib/libeToken.so#g' openssl.cnf.templ
 ```
 
-Set distinguished name defaults in `req_distinguished_name` section
+Set distinguished name defaults to meet your organization in `req_distinguished_name` section
 ```
 sed -i 's#<DN_COUNTRY>#CZ#g' openssl.cnf.templ
 sed -i 's#<DN_STATE>#Královéhradecký kraj#g' openssl.cnf.templ
@@ -27,7 +27,7 @@ sed -i 's#<DN_LOCALITY>#Hradec Králové#g' openssl.cnf.templ
 sed -i 's#<DN_ORG>#Example.org#g' openssl.cnf.templ
 sed -i 's#<DN_ORG_IDENTIFIER>#NTRCZ-123456789#g' openssl.cnf.templ
 ```
-Set OCSP and CRL URL addresses
+Set CRL and OCSP URL addresses
 ```
 sed -i 's#<CRL_DAYS>#90#g' openssl.cnf.templ
 sed -i 's#<CAISSUERS>#http://ca.example.org#g' openssl.cnf.templ
@@ -36,15 +36,16 @@ sed -i 's#<CRL_ROOT>#http://crl.example.org/root.crl#g' openssl.cnf.templ
 sed -i 's#<CRL_DVTLS>#http://crl.example.org/dvtls.crl#g' openssl.cnf.templ
 sed -i 's#<CRL_PERSONAL>#http://crl.example.org/personal.crl#g' openssl.cnf.templ
 ```
-Set Policy OID ([acquired before](oid.md)), CPS URI and notice text
+Set Policy OID ([acquired before](oid.md)), CPS URI and notice text.  
+Replace `{PEN}` by your PEN number or use completely different OID.
 ```
-sed -i 's#<POLICY_OID>#1.3.6.1.4.1.{OUR_PENNumber}.1.1.1#g' openssl.cnf.templ
+sed -i 's#<POLICY_OID>#1.3.6.1.4.1.{PEN}.1.1.1#g' openssl.cnf.templ
 sed -i 's#<CPS_URI>#https://ca.example.org#g' openssl.cnf.templ
 sed -i 's#<NOTICE>#This certificate was issued by Example.org. in accordance with company certificate policy.#g' openssl.cnf.templ
 sed -i 's#<NOTICE_PERSONAL>#This personal certificate was issued by Example.org. in accordance with company certificate policy to its employee for the stated purposes.#g' openssl.cnf.templ
 sed -i 's#<NOTICE_DVTLS>#This SSL/TLS certificate was issued by Example.org. in accordance with company certificate policy to the employee responsible for services running on the specified domain name / IP address.#g' openssl.cnf.templ
 ```
-Set name constraints for issuing CAs
+Set name constraints for Root CA, DV TLS CA and Personal CA:
 - DNS: *.example.lan, *.example.org (including subdomains)
 - Mail: *.example.org (including subdomains)
 - IP _(see warnings below!)_:
@@ -52,17 +53,52 @@ Set name constraints for issuing CAs
     - IPv6 loopback + unique local range fc00::/7
 
 ```
-vim +182 openssl.cnf.templ
+vim +183 openssl.cnf.templ
+```
+```
+[v3_root_name_constraints]
+# Root CA nameConstraints must contain all permits for all subordinate CAs!
+permitted;DNS.1        = example.org
+permitted;DNS.2        = .example.org
+permitted;DNS.3        = example.lan
+permitted;DNS.4        = .example.lan
+
+permitted;email.1      = example.org
+permitted;email.2      = .example.org
+
+# WARNING: Issuing certificates for IP addresses or Internal Name is strongly not recommended.
+#permitted;DNS.5        = localhost
+#permitted;IP.1         = 127.0.0.0/255.0.0.0
+#permitted;IP.2         = 10.0.0.0/255.0.0.0
+#permitted;IP.3         = 172.16.0.0/255.240.0.0
+#permitted;IP.4         = 192.168.0.0/255.255.0.0
+# OpenSSL does not support reduced IPv6 address notation.
+# ::1 = IPv6 loopback (single address)
+#permitted;IP.5         = 0:0:0:0:0:0:0:1/ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+# fc00::/7 = RFC 4193 Unique Local Addresses (ULA)
+#permitted;IP.6         = fc00:0:0:0:0:0:0:0/fe00:0:0:0:0:0:0:0
+
 [v3_dvtls_name_constraints]
-...
-permitted;DNS.1 = example.org
-permitted;DNS.2 = .example.org
-permitted;DNS.3 = example.lan
-permitted;DNS.4 = .example.lan
-...
+permitted;DNS.1        = example.org
+permitted;DNS.2        = .example.org
+permitted;DNS.3        = example.lan
+permitted;DNS.4        = .example.lan
+
+# WARNING: Issuing certificates for IP addresses or Internal Name is strongly not recommended.
+#permitted;DNS.5        = localhost
+#permitted;IP.1         = 127.0.0.0/255.0.0.0
+#permitted;IP.2         = 10.0.0.0/255.0.0.0
+#permitted;IP.3         = 172.16.0.0/255.240.0.0
+#permitted;IP.4         = 192.168.0.0/255.255.0.0
+# OpenSSL does not support reduced IPv6 address notation.
+# ::1 = IPv6 loopback (single address)
+#permitted;IP.5         = 0:0:0:0:0:0:0:1/ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+# fc00::/7 = RFC 4193 Unique Local Addresses (ULA)
+#permitted;IP.6         = fc00:0:0:0:0:0:0:0/fe00:0:0:0:0:0:0:0
+
 [v3_personal_name_constraints]
-permitted;email.1 = example.org
-permitted;email.2 = .example.org
+permitted;email.1      = example.org
+permitted;email.2      = .example.org
 ```
 
 > **_WARNING: Issuing certificates for IP addresses or Internal Name is strongly not recommended._**  
