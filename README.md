@@ -14,13 +14,13 @@ The next step would be to create a wrapper similar to [EasyRSA](https://github.c
 
 ## Contents
 ### CA Initialization
-- [OID request](man/oid.md)
-- [Safenet eToken 5300 environment setup & token initialization](man/init-token.md)
-- [CA configuration, nameConstraints, directory initialization](man/init.md)
-- [Root Certificate Authority initialization](man/init-root.md)
-- [DV TLS Certificate Authority initialization](man/init-dvtls.md)
-- [Personal Certificate Authority initialization](man/init-personal.md)
-- [Private key backup usage](man/backup.md)
+1. [OID request](man/oid.md)
+2. [Safenet eToken 5300 environment setup & token initialization](man/init-token.md)
+3. [CA configuration, nameConstraints, directory initialization](man/init.md)
+4. [Root Certificate Authority initialization](man/init-root.md)
+5. [DV TLS Certificate Authority initialization](man/init-dvtls.md)
+6. [Personal Certificate Authority initialization](man/init-personal.md)
+7. [Private key backup usage](man/backup.md)
 
 ### Issuing & revoking certificates, CRL, OCSP
 - [RADIUS server certificate issue](man/issue-radius.md)
@@ -30,18 +30,23 @@ The next step would be to create a wrapper similar to [EasyRSA](https://github.c
 - [OCSP certificate issue](man/issue-ocsp.md)
 - [Revoking a certificate](man/revoke.md)
 
-## HSM keypair IDs
-- 1 = Root CA
-- 2 = DV TLS CA
-- 3 = Personal CA
+## HSM keypair IDs and labels
+When interacting with HSM via PKCS#11, we can specify which key to use by its `id` (numeric) or `label` (string).
+Commands in this manual sets both `id` and `label` when saving keys to HSM. So you can use either. Here, we use `id`.
+
+| **ID** | **Label**       | **Certificate**              |
+|--------|-----------------|------------------------------|
+| 1      | root-ecc-g1     | Root CA ECC Generation 1     |
+| 2      | dvtls-ecc-g1    | DV TLS CA ECC Generation 1   |
+| 3      | personal-ecc-g1 | Personal CA ECC Generation 1 |
 
 ## Supported End-entity Certificate Types
 | **Certificate type**      | **Openssl `-extensions` name** | **Purposes**                                                                                                                      |
 |---------------------------|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| Personal certificate      | `v3_personal` | S/MIME, MS document signing, MS smart card / certificate logon, SMTP/IMAP certificate authentication, 802.1X EAP-TLS, IPSec IKE authentication, OpenVPN authentication |
-| Server certificate        | `v3_server` | SSL/TLS, HTTPS, RDP |
+| Personal certificate      | `v3_personal`      | S/MIME, MS document signing, MS smart card / certificate logon, SMTP/IMAP certificate authentication, 802.1X EAP-TLS, IPSec IKE authentication, OpenVPN authentication |
+| Server certificate        | `v3_server`        | SSL/TLS, HTTPS, RDP |
 | RADIUS server certificate | `v3_radius_server` | RADIUS server |
-| OCSP                      | `v3_ocsp` | OCSP signing |
+| OCSP                      | `v3_ocsp`          | OCSP signing |
 
 ## Author
 [Matyáš Vohralík](https://mv.cesium.cz), 2022-23
