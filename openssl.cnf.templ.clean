@@ -147,6 +147,7 @@ certificatePolicies    = @v3_policy_dvtls
 
 [v3_server_alt_names]
 DNS.1                  = <HOST>.example.lan
+# 
 #DNS.2                  = localhost
 #IP.1                   = 127.0.0.1
 #IP.2                   = 192.168.1.100
@@ -179,15 +180,22 @@ keyUsage               = critical, nonRepudiation, digitalSignature, keyEncipher
 extendedKeyUsage       = critical, OCSPSigning
 
 [v3_dvtls_name_constraints]
-permitted;IP.1         = 127.0.0.0/255.0.0.0
-permitted;IP.3         = 10.0.0.0/255.0.0.0
-permitted;IP.4         = 172.16.0.0/255.240.0.0
-permitted;IP.5         = 192.168.0.0/255.255.0.0
+# WARNING: Issuing certificates for IP addresses or Internal Name is strongly not recommended.
 permitted;DNS.1        = example.org
 permitted;DNS.2        = .example.org
 permitted;DNS.3        = example.lan
 permitted;DNS.4        = .example.lan
-permitted;DNS.5        = localhost
+
+#permitted;DNS.5        = localhost
+#permitted;IP.1         = 127.0.0.0/255.0.0.0
+#permitted;IP.3         = 10.0.0.0/255.0.0.0
+#permitted;IP.4         = 172.16.0.0/255.240.0.0
+#permitted;IP.5         = 192.168.0.0/255.255.0.0
+# OpenSSL does not support reduced IPv6 address notation.
+# ::1 = IPv6 loopback (single address)
+#permitted;IP.6         = 0000:0000:0000:0000:0000:0000:0000:0001/fffff:ffff:ffff:ffff:ffff:ffff:ffff    # IPv6 loopback (single address)
+# fc00::/7 = RFC 4193 Unique Local Addresses (ULA)
+#permitted;IP.7         = fc00:0000:0000:0000:0000:0000:0000:0000/fe00:0000:0000:0000:0000:0000:0000:0000
 
 [v3_personal_name_constraints]
 permitted;email.1      = example.org

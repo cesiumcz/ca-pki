@@ -27,4 +27,4 @@ Check CRL contents
 openssl crl -in crl/ca.crl.der -noout -text
 ```
 
-**Do not forget to upload new CRL onto webserver!**
+**Do not forget to upload new CRL onto OCSP responder and CRL webserver!**

@@ -1,7 +1,7 @@
-## Directory initialization
+## CA configuration, nameConstraints
 ```
 umask 077
-git clone git@github.com:cesiumcz/ca-pki.git
+git clone git@github.com:cesiumcz/openssl-ca.git
 ```
 
 Change remote URL to target your repository:  
@@ -45,30 +45,34 @@ sed -i 's#<NOTICE_PERSONAL>#This personal certificate was issued by Example.org.
 sed -i 's#<NOTICE_DVTLS>#This SSL/TLS certificate was issued by Example.org. in accordance with company certificate policy to the employee responsible for services running on the specified domain name / IP address.#g' openssl.cnf.templ
 ```
 Set name constraints for issuing CAs
-- IP: IPv4 loopbacks + all private IPv4 ranges = 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
 - DNS: *.example.lan, *.example.org (including subdomains)
 - Mail: *.example.org (including subdomains)
+- IP _(see warnings below!)_:
+    - IPv4 loopbacks + all private IPv4 ranges = 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
+    - IPv6 loopback + unique local range fc00::/7
 
 ```
-vim +186 openssl.cnf.templ
+vim +182 openssl.cnf.templ
 [v3_dvtls_name_constraints]
 ...
 permitted;DNS.1 = example.org
 permitted;DNS.2 = .example.org
 permitted;DNS.3 = example.lan
 permitted;DNS.4 = .example.lan
-permitted;DNS.5 = localhost
 ...
 [v3_personal_name_constraints]
 permitted;email.1 = example.org
 permitted;email.2 = .example.org
 ```
 
-> **_NOTE on nameConstraints:_** If you plan to use DV TLS CA also for SSL/TLS inspection firewall, do not apply `nameConstraints`.  
-However, typically, we would create an extra, unconstrained CA just for SSL/TLS inspection and issue certificates for firewalls.  
-*This note does not relate to Personal CA, in which case `nameConstraints` for e-mail addresses are entirely relevant.*
+> **_WARNING: Issuing certificates for IP addresses or Internal Name is strongly not recommended._**  
+> Because reserved IP addresses and Internal Names (intranet) are not unique, they are easy to impersonate by attackers to commit man-in-the-middle attacks and get unauthorized access to the data.  
+> According to [CA/Browser forum Baseline Requirements](https://cabforum.org/wp-content/uploads/CA-Browser-Forum-BR-v2.0.1.pdf):  
+> - 2015-11-01 - Issuance of Certificates with Reserved IP Address or Internal Name prohibited.  
+> - 2016‐10‐01 - All Certificates with Reserved IP Address or Internal Name must be revoked.  
 
-> **_NOTE on the local domain name:_** The best practice is to use a subdomain of a public domain (corp.example.org). If we do not have any public domain, we can use non-conflicting TLDs according to [RFC 6762 Appendix G](https://www.rfc-editor.org/rfc/rfc6762#appendix-G):
+> **_WARNING: Do not use .local as a private TLD._**  
+The best practice is to use a subdomain of a public domain (corp.example.org). If we do not have any public domain, we can use non-conflicting TLDs according to [RFC 6762 Appendix G](https://www.rfc-editor.org/rfc/rfc6762#appendix-G):
 > - .intranet.
 > - .internal.
 > - .private.
@@ -76,5 +80,9 @@ However, typically, we would create an extra, unconstrained CA just for SSL/TLS 
 > - .home.
 > - .lan.
 >
-> **The usage of .local is highly not recommended:**
 >> Using ".local" as a private top-level domain conflicts with Multicast DNS and may cause problems for users.
+
+> **_NOTE on nameConstraints: SSL/TLS inspection firewall_**  
+If you plan to use DV TLS CA also for SSL/TLS inspection firewall, do not apply `nameConstraints` (for obvoius reasons).  
+However, typically, we would create an extra, unconstrained CA just for SSL/TLS inspection and issue certificates for firewalls.  
+*This note does not relate to Personal CA, in which case `nameConstraints` for e-mail addresses are entirely relevant.*

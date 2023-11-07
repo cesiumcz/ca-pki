@@ -14,9 +14,10 @@ openssl ecparam -genkey -name prime256v1 | openssl ec -aes256 -out private/<HOST
 # RSA 2048 bit
 openssl genrsa -aes256 -out private/<HOST>.example.lan_<YEAR>.key.pem 2048 && chmod 400 private/<HOST>.example.lan_<YEAR>.key.pem
 ```
-Set alternative name(s)
+Set alternative name(s)  
+**WARNING: Issuing certificates for IP addresses or Internal Name is strongly not recommended.**
 ```
-vim +149 openssl.cnf
+vim +148 openssl.cnf
 [v3_server_alt_names]
 DNS.1                  = <HOST>.example.lan
 #DNS.2                  = localhost
@@ -51,7 +52,7 @@ Fields that are set to match according to policy does not need to be fixed since
 
 Set alternative name(s)
 ```
-vim +149 openssl.cnf
+vim +148 openssl.cnf
 [v3_server_alt_names]
 DNS.1                  = <HOST>.example.lan
 #DNS.2                  = localhost
