@@ -24,7 +24,7 @@ Generate ECC NIST-384 key in HSM with ID 3
 ```
 pkcs11-tool --module libeToken.so \
 	--login --keypairgen \
-	--id 3 --label personal-ecc-g1 \
+	--id 20 --label personal-ecc-g1 \
 	--key-type EC:secp384r1
 ```
 [Alternative] Generate key in computer and import it into HSM
@@ -34,13 +34,13 @@ openssl ecparam -genkey -name secp384r1 | openssl ec -aes256 -out private/ca.key
 `pkcs11-tool` needs DER encoded private key to import:
 ```
 openssl ec -inform PEM -in private/ca.key.pem -outform DER -out private/ca.key.der
-pkcs11-tool --module libeToken.so --login --write-object private/ca.key.der --type privkey --id 3 --label personal-ecc-g1
+pkcs11-tool --module libeToken.so --login --write-object private/ca.key.der --type privkey --id 20 --label personal-ecc-g1
 ```
 Generate request using private key in HSM
 ```
 openssl req -config ./openssl.cnf -new \
       -engine pkcs11 -keyform engine \
-      -key 0:03 \
+      -key 0:20 \
       -out csr/ca.csr.pem
 ```
 [Alternative] Generate request using private key in computer
@@ -53,8 +53,9 @@ Sign Personal CA certificate by root CA
 ```
 cd ../root
 ```
-Set name constraints for Personal issuing CA:
+Set policy and name constraints for Personal issuing CA:
 ```
+sed -i '/^\[v3_issuing_ca]/,/^\[/{s/^#*certificatePolicies[[:space:]]*=.*/certificatePolicies = @v3_policy_personal_ca/}' openssl.cnf
 sed -i '/^\[v3_issuing_ca]/,/^\[/{s/^#*nameConstraints[[:space:]]*=.*/nameConstraints = critical, @v3_personal_name_constraints/}' openssl.cnf
 ```
 Sign the request using Root CA in HSM
@@ -64,11 +65,15 @@ openssl ca -config ./openssl.cnf \
       -engine pkcs11 -keyform engine -keyfile 0:01 \
       -in ../personal/csr/ca.csr.pem -out ../personal/certs/ca.cert.pem
 ```
-Sign the request using Root CA in computer
+[Alternative] Sign the request using Root CA in computer
 ```
 openssl ca -config ./openssl.cnf \
       -extensions v3_issuing_ca -days 3650 -notext \
       -in ../personal/csr/ca.csr.pem -out ../personal/certs/ca.cert.pem
+```
+Undo changes in `root/openssl.cnf`
+```
+git checkout HEAD -- openssl.cnf
 ```
 Root CA must have Personal CA certificate in `certs/` for future revoke. Create a symlink to it:
 ```
@@ -96,12 +101,12 @@ sed -i '/^\[req_distinguished_name]/,/^\[/{s/^#telephoneNumber /telephoneNumber 
 [Optional] Import the certificate into HSM
 ```
 openssl x509 -in ../personal/certs/ca.cert.pem -out ../personal/certs/ca.cert.der -outform DER
-pkcs11-tool --module libeToken.so --login --write-object ../personal/certs/ca.cert.der --type cert --id 3 --label personal-ecc-g1
+pkcs11-tool --module libeToken.so --login --write-object ../personal/certs/ca.cert.der --type cert --id 20 --label personal-ecc-g1
 ```
 [Optional] Git commit
 ```
 git add .
-git commit -m "Created Personal CA (HSM ID=3)"
+git commit -m "Created Personal CA (HSM ID=20)"
 git push
 ```
 Then:

@@ -31,14 +31,13 @@ The next step would be to create a wrapper similar to [EasyRSA](https://github.c
 - [Revoking a certificate](man/revoke.md)
 
 ## HSM keypair IDs and labels
-When interacting with HSM via PKCS#11, we can specify which key to use by its `id` (numeric) or `label` (string).
-Commands in this manual sets both `id` and `label` when saving keys to HSM. So you can use either. Here, we use `id`.
+When interacting with HSM via PKCS#11, we specify which key to use by its `id` (numeric).
 
 | **ID** | **Label**       | **Certificate**              |
 |--------|-----------------|------------------------------|
 | 1      | root-ecc-g1     | Root CA ECC Generation 1     |
-| 2      | dvtls-ecc-g1    | DV TLS CA ECC Generation 1   |
-| 3      | personal-ecc-g1 | Personal CA ECC Generation 1 |
+| 10     | dvtls-ecc-g1    | DV TLS CA ECC Generation 1   |
+| 20     | personal-ecc-g1 | Personal CA ECC Generation 1 |
 
 ## Supported End-entity Certificate Types
 | **Certificate type**      | **Openssl `-extensions` name** | **Purposes**                                                                                                                      |

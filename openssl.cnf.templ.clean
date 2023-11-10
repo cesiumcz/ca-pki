@@ -92,8 +92,8 @@ basicConstraints       = critical, CA:TRUE
 subjectKeyIdentifier   = hash
 authorityKeyIdentifier = keyid:always,issuer
 keyUsage               = critical, digitalSignature, cRLSign, keyCertSign
-certificatePolicies    = @v3_policy
-nameConstraints        = @v3_root_name_constraints
+certificatePolicies    = @v3_policy_root
+nameConstraints        = critical, @v3_root_name_constraints
 
 [v3_issuing_ca]
 # Extensions for a typical issuing CA (`man x509v3_config`).
@@ -104,8 +104,8 @@ keyUsage               = critical, digitalSignature, cRLSign, keyCertSign
 crlDistributionPoints  = URI:<CRL_ROOT>
 authorityInfoAccess    = OCSP;URI:<OCSP>
 authorityInfoAccess    = caIssuers;URI:<CAISSUERS>
+certificatePolicies    = 
 #nameConstraints        = 
-certificatePolicies    = @v3_policy
 
 [v3_personal]
 # Extensions for client certificates (`man x509v3_config`).
@@ -148,8 +148,9 @@ certificatePolicies    = @v3_policy_dvtls
 
 [v3_server_alt_names]
 DNS.1                  = <HOST>.example.lan
+#DNS.2                  = <ALIAS>.example.lan
 # WARNING: Issuing certificates for IP addresses or Internal Name is strongly not recommended.
-#DNS.2                  = localhost
+#DNS.3                  = localhost
 #IP.1                   = 127.0.0.1
 #IP.2                   = 192.168.1.100
 
@@ -228,16 +229,32 @@ permitted;email.2      = .example.org
 # Extension for CRLs (`man x509v3_config`).
 authorityKeyIdentifier = keyid:always
 
-[v3_policy]
-policyIdentifier = <POLICY_OID>
+[v3_policy_root]
+policyIdentifier = <ROOT_POLICY_OID>
 CPS.1            = <CPS_URI>
-userNotice.1     = @v3_policy_notice
+userNotice.1     = @v3_policy_root_notice
 
-[v3_policy_notice]
-explicitText     = "UTF8:<NOTICE>"
+[v3_policy_root_notice]
+explicitText     = "UTF8:<NOTICE_ROOT>"
+
+[v3_policy_dvtls_ca]
+policyIdentifier = <ROOT_POLICY_OID>
+CPS.1            = <CPS_URI>
+userNotice.1     = @v3_policy_dvtls_ca_notice
+
+[v3_policy_dvtls_ca_notice]
+explicitText     = "UTF8:<NOTICE_DVTLS_CA>"
+
+[v3_policy_personal_ca]
+policyIdentifier = <ROOT_POLICY_OID>
+CPS.1            = <CPS_URI>
+userNotice.1     = @v3_policy_personal_ca_notice
+
+[v3_policy_personal_ca_notice]
+explicitText     = "UTF8:<NOTICE_PERSONAL_CA>"
 
 [v3_policy_personal]
-policyIdentifier = <POLICY_OID>
+policyIdentifier = <PERSONAL_POLICY_OID>
 CPS.1            = <CPS_URI>
 userNotice.1     = @v3_policy_personal_notice
 
@@ -245,7 +262,7 @@ userNotice.1     = @v3_policy_personal_notice
 explicitText     = "UTF8:<NOTICE_PERSONAL>"
 
 [v3_policy_dvtls]
-policyIdentifier = <POLICY_OID>
+policyIdentifier = <DVTLS_POLICY_OID>
 CPS.1            = <CPS_URI>
 userNotice.1     = @v3_policy_dvtls_notice
 

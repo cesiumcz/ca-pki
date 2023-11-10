@@ -39,11 +39,22 @@ sed -i 's#<CRL_PERSONAL>#http://crl.example.org/personal.crl#g' openssl.cnf.temp
 Set Policy OID ([acquired before](oid.md)), CPS URI and notice text.  
 Replace `{PEN}` by your PEN number or use completely different OID.
 ```
-sed -i 's#<POLICY_OID>#1.3.6.1.4.1.{PEN}.1.1.1#g' openssl.cnf.templ
+export OID="1.3.6.1.4.1.{PEN}"
+
 sed -i 's#<CPS_URI>#https://ca.example.org#g' openssl.cnf.templ
-sed -i 's#<NOTICE>#This certificate was issued by Example.org. in accordance with company certificate policy.#g' openssl.cnf.templ
-sed -i 's#<NOTICE_PERSONAL>#This personal certificate was issued by Example.org. in accordance with company certificate policy to its employee for the stated purposes.#g' openssl.cnf.templ
-sed -i 's#<NOTICE_DVTLS>#This SSL/TLS certificate was issued by Example.org. in accordance with company certificate policy to the employee responsible for services running on the specified domain name / IP address.#g' openssl.cnf.templ
+
+sed -i "s#<ROOT_POLICY_OID>#$OID.1.1.1#g" openssl.cnf.templ
+sed -i 's#<NOTICE_ROOT>#This root certificate was issued by Example.org in accordance with company certificate policy.#g' openssl.cnf.templ
+
+sed -i "s#<DVTLS_POLICY_OID>#$OID.1.10.1#g" openssl.cnf.templ
+sed -i 's#<NOTICE_DVTLS_CA>#This certificate was issued by Example.org in accordance with company certificate policy for domain validated certificate issuing.#g' openssl.cnf.templ
+
+sed -i "s#<PERSONAL_POLICY_OID>#$OID.1.20.1#g" openssl.cnf.templ
+sed -i 's#<NOTICE_PERSONAL_CA>#This certificate was issued by Example.org in accordance with company certificate policy for personal certificate issuing.#g' openssl.cnf.templ
+
+sed -i 's#<NOTICE_PERSONAL>#This personal certificate was issued by Example.org in accordance with company certificate policy to its employee for the stated purposes.#g' openssl.cnf.templ
+
+sed -i 's#<NOTICE_DVTLS>#This SSL/TLS certificate was issued by Example.org in accordance with company certificate policy to the employee responsible for services running on the specified domain name / IP address.#g' openssl.cnf.templ
 ```
 Set name constraints for Root CA, DV TLS CA and Personal CA:
 - DNS: *.example.lan, *.example.org (including subdomains)
@@ -53,7 +64,7 @@ Set name constraints for Root CA, DV TLS CA and Personal CA:
     - IPv6 loopback + unique local range fc00::/7
 
 ```
-vim +183 openssl.cnf.templ
+vim +185 openssl.cnf.templ
 ```
 ```
 [v3_root_name_constraints]

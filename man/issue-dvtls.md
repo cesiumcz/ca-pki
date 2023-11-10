@@ -17,14 +17,15 @@ openssl genrsa -aes256 -out private/<HOST>.example.lan_<YEAR>.key.pem 2048 && ch
 Set alternative name(s)  
 **WARNING: Issuing certificates for IP addresses or Internal Name is strongly not recommended.**
 ```
-vim +149 openssl.cnf
+vim +150 openssl.cnf
 ```
 ```
 [v3_server_alt_names]
 DNS.1                  = <HOST>.example.lan
-#DNS.2                  = localhost
+#DNS.2                  = <ALIAS>.example.lan
+#DNS.3                  = localhost
 #IP.1                   = 127.0.0.1
-#IP.2                   = <HOST_IP>
+#IP.2                   = 192.168.1.100
 ```
 
 Create a request. Set CN to <HOST>.example.lan, leave email blank
@@ -55,21 +56,22 @@ Fields that are set to match according to policy does not need to be fixed since
 Set alternative name(s)  
 **WARNING: Issuing certificates for IP addresses or Internal Name is strongly not recommended.**
 ```
-vim +149 openssl.cnf
+vim +150 openssl.cnf
 ```
 ```
 [v3_server_alt_names]
 DNS.1                  = <HOST>.example.lan
-#DNS.2                  = localhost
+#DNS.2                  = <ALIAS>.example.lan
+#DNS.3                  = localhost
 #IP.1                   = 127.0.0.1
-#IP.2                   = <HOST_IP>
+#IP.2                   = 192.168.1.100
 ```
 
 Sign the request using DV TLS CA private key in HSM.
 ```
 openssl ca -config ./openssl.cnf \
 	-extensions v3_server -days 730 -notext \
-	-engine pkcs11 -keyform engine -keyfile 0:02 \
+	-engine pkcs11 -keyform engine -keyfile 0:10 \
 	-inform DER -in csr/<HOST>.example.lan_<YEAR>.csr.der -out certs/<HOST>.example.lan_<YEAR>.cert.pem
 ```
 [Alternative] Sign the request using DV TLS CA private key in computer
