@@ -17,7 +17,7 @@ openssl genrsa -aes256 -out private/<HOST>.example.lan_<YEAR>.key.pem 2048 && ch
 Set alternative name(s)  
 **WARNING: Issuing certificates for IP addresses or Internal Name is strongly not recommended.**
 ```
-vim +150 openssl.cnf
+vim +149 openssl.cnf
 ```
 ```
 [v3_server_alt_names]
@@ -28,7 +28,7 @@ DNS.1                  = <HOST>.example.lan
 #IP.2                   = 192.168.1.100
 ```
 
-Create a request. Set CN to <HOST>.example.lan, leave email blank
+Create a request. Set CN to <HOST>.example.lan.
 ```
 openssl req -config ./openssl.cnf -extensions v3_server -new \
 	-key private/<HOST>.example.lan_<YEAR>.key.pem \
@@ -56,7 +56,7 @@ Fields that are set to match according to policy does not need to be fixed since
 Set alternative name(s)  
 **WARNING: Issuing certificates for IP addresses or Internal Name is strongly not recommended.**
 ```
-vim +150 openssl.cnf
+vim +149 openssl.cnf
 ```
 ```
 [v3_server_alt_names]

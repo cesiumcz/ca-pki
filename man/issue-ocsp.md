@@ -6,7 +6,7 @@ cd pki/<CA_DIRECTORY>
 mkdir -p csr private newcerts
 openssl ecparam -genkey -noout -name prime256v1 -out private/ocsp.key.pem && chmod 400 private/ocsp.key.pem
 ```
-Generate request. Set CN to ocsp.example.org, leave email blank
+Generate request. Set CN to ocsp.example.org.
 ```
 openssl req -config ./openssl.cnf -new \
 	-key private/ocsp.key.pem \

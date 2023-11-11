@@ -27,14 +27,26 @@ sed -i 's#<DN_LOCALITY>#Hradec Králové#g' openssl.cnf.templ
 sed -i 's#<DN_ORG>#Example.org#g' openssl.cnf.templ
 sed -i 's#<DN_ORG_IDENTIFIER>#NTRCZ-123456789#g' openssl.cnf.templ
 ```
-Set CRL and OCSP URL addresses
+Set CRL, OCSP and CA Issuers URL addresses
 ```
 sed -i 's#<CRL_DAYS>#90#g' openssl.cnf.templ
-sed -i 's#<CAISSUERS>#http://ca.example.org#g' openssl.cnf.templ
-sed -i 's#<OCSP>#http://ocsp.example.org#g' openssl.cnf.templ
-sed -i 's#<CRL_ROOT>#http://crl.example.org/root.crl#g' openssl.cnf.templ
-sed -i 's#<CRL_DVTLS>#http://crl.example.org/dvtls.crl#g' openssl.cnf.templ
-sed -i 's#<CRL_PERSONAL>#http://crl.example.org/personal.crl#g' openssl.cnf.templ
+
+sed -i 's#<OCSP1>#http://ocsp.example.org#g' openssl.cnf.templ
+#sed -i 's#<OCSP2>#http://ocsp2.example.org#g' openssl.cnf.templ
+
+sed -i 's#<CAISSUERS1_ROOT>#http://crt.example.org/example-root-ecc-g1.der#g' openssl.cnf.templ
+#sed -i 's#<CAISSUERS2_ROOT>#http://crt2.example.org/example-root-ecc-g1.der#g' openssl.cnf.templ
+sed -i 's#<CAISSUERS1_DVTLS>#http://crt.example.org/example-dvtls-ecc-g1.der#g' openssl.cnf.templ
+#sed -i 's#<CAISSUERS2_DVTLS>#http://crt2.example.org/example-dvtls-ecc-g1.der#g' openssl.cnf.templ
+sed -i 's#<CAISSUERS1_PERSONAL>#http://crt.example.org/example-personal-ecc-g1.der#g' openssl.cnf.templ
+#sed -i 's#<CAISSUERS2_PERSONAL>#http://crt2.example.org/example-personal-ecc-g1.der#g' openssl.cnf.templ
+
+sed -i 's#<CRL1_ROOT>#http://crl.example.org/example-root-ecc-g1.crl#g' openssl.cnf.templ
+#sed -i 's#<CRL2_ROOT>#http://crl2.example.org/example-root-ecc-g1.crl#g' openssl.cnf.templ
+sed -i 's#<CRL1_DVTLS>#http://crl.example.org/example-dvtls-ecc-g1.crl#g' openssl.cnf.templ
+#sed -i 's#<CRL2_DVTLS>#http://crl2.example.org/example-dvtls-ecc-g1.crl#g' openssl.cnf.templ
+sed -i 's#<CRL1_PERSONAL>#http://crl.example.org/example-personal-ecc-g1.crl#g' openssl.cnf.templ
+#sed -i 's#<CRL2_PERSONAL>#http://crl2.example.org/example-personal-ecc-g1.crl#g' openssl.cnf.templ
 ```
 Set Policy OID ([acquired before](oid.md)), CPS URI and notice text.  
 Replace `{PEN}` by your PEN number or use completely different OID.
@@ -64,7 +76,7 @@ Set name constraints for Root CA, DV TLS CA and Personal CA:
     - IPv6 loopback + unique local range fc00::/7
 
 ```
-vim +185 openssl.cnf.templ
+vim +189 openssl.cnf.templ
 ```
 ```
 [v3_root_name_constraints]

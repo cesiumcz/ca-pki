@@ -14,7 +14,7 @@ Set RADIUS server DNS name
 sed -i 's#<RADIUS_DNS>#radius.example.lan#g' openssl.cnf
 ```
 
-Create a request. Set CN to radius.example.lan, leave email blank
+Create a request. Set CN to radius.example.lan.
 ```
 openssl req -config ./openssl.cnf -new \
 	-key private/radius.example.lan_<YEAR>.key.pem \

@@ -16,7 +16,7 @@ openssl genrsa -aes256 -out private/<USERNAME>_<YEAR>.key.pem 2048 && chmod 400 
 ```
 Set email address(es) and [optionally] Windows UPN (username) for smartcard logon in `openssl.cnf`
 ```
-vim +129 openssl.cnf
+vim +128 openssl.cnf
 ```
 [v3_personal_alt_names]
 email.1                = copy
@@ -51,7 +51,7 @@ Fields that are set to match according to policy does not need to be fixed since
 
 Set email address(es) and [optionally] Windows UPN (username) for smartcard logon in `openssl.cnf`
 ```
-vim +129 openssl.cnf
+vim +128 openssl.cnf
 ```
 [v3_personal_alt_names]
 email.1                = copy
