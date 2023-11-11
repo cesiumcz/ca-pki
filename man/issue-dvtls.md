@@ -97,9 +97,17 @@ Create fullchain certificate
 cat certs/<HOST>.example.lan_<YEAR>.cert.pem certs/ca.fchain-cert.pem > certs/<HOST>.example.lan_<YEAR>.fchain-cert.pem
 ```
 
-Create PKCS#12 bundle
+Create PKCS#12 bundle (for Windows Server <2012 see below)
 ```
 openssl pkcs12 -export -out private/<HOST>.example.lan_<YEAR>.p12 -inkey private/<HOST>.example.lan_<YEAR>.key.pem -in certs/<HOST>.example.lan_<YEAR>.fchain-cert.pem
+```
+**Windows server <2012** is not compatible with default OpenSSL v3 PKCS#12 export options.  
+It yields "The password you entered is incorrect". Needs modification:
+```
+openssl pkcs12 -export -certpbe PBE-SHA1-3DES -keypbe PBE-SHA1-3DES -nomac \
+	-out private/<HOST>.example.lan_<YEAR>.p12 \
+	-inkey private/<HOST>.example.lan_<YEAR>.key.pem \
+	-in certs/<HOST>.example.lan_<YEAR>.fchain-cert.pem
 ```
 [Optional] Git commit
 ```
