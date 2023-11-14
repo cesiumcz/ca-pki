@@ -308,5 +308,5 @@ pkcs11           = pkcs11_section
 [pkcs11_section]
 engine_id        = pkcs11
 #dynamic_path    = /usr/local/lib/engines/pkcs11.so
-MODULE_PATH      = /usr/lib/libeToken.so
+MODULE_PATH      = <OpenSC_LIB>
 init             = 0

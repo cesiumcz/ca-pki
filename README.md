@@ -15,7 +15,7 @@ The next step would be to create a wrapper similar to [EasyRSA](https://github.c
 ## Contents
 ### CA Initialization
 1. [OID request](man/oid.md)
-2. [Safenet eToken 5300 environment setup & token initialization](man/init-token.md)
+2. [HSM (SmartCard / USB token) initialization & environment setup](man/init-hsm.md)
 3. [CA configuration, nameConstraints, directory initialization](man/init.md)
 4. [Root Certificate Authority initialization](man/init-root.md)
 5. [DV TLS Certificate Authority initialization](man/init-dvtls.md)

@@ -1,4 +1,6 @@
-## Safenet eToken 5300 environment setup & token initialization
+## HSM (SmartCard / USB token) initialization & environment setup
+We will demonstrate the installation and the use of PKCS#11 on [Thales SafeNet eToken 5300 Series](https://cpl.thalesgroup.com/access-management/authenticators/pki-usb-authentication/etoken-5300-usb-token).
+
 ### Environment setup
 OS must be configured to work with SafeNet eToken 5300 using `libeToken.so` library and various packages.  
 Here is how to setup a Debian-like Linux system:

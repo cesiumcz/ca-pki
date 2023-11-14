@@ -13,8 +13,7 @@ git remote set-url origin <YOUR_REMOTE_REPO_URL>
 cp openssl.cnf.templ.clean openssl.cnf.templ
 ```
 
-Set path to HSM OpenSC library
-
+Set path to HSM OpenSC library (here, we use Thales eToken)
 ```
 sed -i 's#<OpenSC_LIB>#/usr/lib/libeToken.so#g' openssl.cnf.templ
 ```
